@@ -24,6 +24,9 @@
     "ws2812": {
         "pin": "D3"
     },
+    "rgb_matrix": {
+        "driver": "ws2812"
+    },
     "rgblight": {
         "hue_steps": 10,
         "led_count": 64,

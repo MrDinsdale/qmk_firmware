@@ -1,28 +1,18 @@
-// Copyright 2022 Will Winder (@winder)
-// SPDX-License-Identifier: GPL-2.0-or-later
-
 #pragma once
 
-#define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_RAINBOW_SWIRL+2
+#define MASTER_LEFT
 
-#ifdef OLED_ENABLE
-#    define OLED_DISPLAY_128X64
-#    define OLED_TIMEOUT 30000
-#endif
+/* Reduce size */
+#define LAYER_STATE_8BIT
 
 #ifdef RGB_MATRIX_ENABLE
-#   define RGB_MATRIX_LED_COUNT 64
-#   define RGB_MATRIX_SPLIT { 32, 32 }
-#   define RGB_MATRIX_MAXIMUM_BRIGHTNESS 255
 #   define RGB_MATRIX_HUE_STEP 8
 #   define RGB_MATRIX_SAT_STEP 16
 #   define RGB_MATRIX_VAL_STEP 16
 #   define RGB_MATRIX_SPD_STEP 10
-
 // EFFECTS
 #   define ENABLE_RGB_MATRIX_ALPHAS_MODS
 #   define ENABLE_RGB_MATRIX_BREATHING
-
 // KEYPRESSES EFFECTS
 #   define RGB_MATRIX_KEYPRESSES
 #   define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
