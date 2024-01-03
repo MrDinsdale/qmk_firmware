@@ -3,22 +3,6 @@
 
 #include "quantum.h"
 
-#ifdef OLED_ENABLE
-oled_rotation_t oled_init_kb(oled_rotation_t rotation) {
-    return OLED_ROTATION_180;
-}
-
-bool oled_task_kb(void) {
-    if (!oled_task_user()) {
-        return false;
-    }
-    oled_write_P(PSTR("Avalanche\nVersion 4"), false);
-
-    return true;
-}
-#endif
-
-
 #ifdef RGB_MATRIX_ENABLE
 led_config_t g_led_config = { {
     { 27,     26, 18, 17,  8, 7, NO_LED },
