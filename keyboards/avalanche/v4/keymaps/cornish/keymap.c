@@ -351,7 +351,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     oled_write_P(led_state.caps_lock ? PSTR("  Caps Lock   : /\n") : PSTR("  Caps Lock   : X\n"), false);
     oled_write_P(led_state.scroll_lock ? PSTR("  Scroll Lock : /\n") : PSTR("  Scroll Lock : X\n"), false);
 
-    oled_write_P(PSTR(" ------------------\n"), false);
+    oled_write_P(PSTR("\n\n"), false);
   }
 
   bool oled_task_kb(void) {
