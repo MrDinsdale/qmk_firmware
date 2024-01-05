@@ -342,34 +342,24 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
   static void render_status(void) {
     oled_write_P(PSTR(" ------------------\n"), false);
-
-    switch (get_highest_layer(layer_state)) {
-      case _ALPHA:
-        oled_write_P(PSTR("  Alpha Layer\n"), false);
-      break;
-      case _SYMBOLS:
-        oled_write_P(PSTR("  Symbols Layer\n"), false);
-      break;
-      case _NAVIGATION:
-        oled_write_P(PSTR("  Navigation Layer\n"), false);
-      break;
-    }
-
+    oled_write_P(PSTR("  Avalanche v4\n"), false);
     oled_write_P(PSTR(" ------------------\n"), false);
 
     led_t led_state = host_keyboard_led_state();
+
     oled_write_P(led_state.num_lock ? PSTR("  Num Lock    : /\n") : PSTR("  Num Lock    : X\n"), false);
     oled_write_P(led_state.caps_lock ? PSTR("  Caps Lock   : /\n") : PSTR("  Caps Lock   : X\n"), false);
     oled_write_P(led_state.scroll_lock ? PSTR("  Scroll Lock : /\n") : PSTR("  Scroll Lock : X\n"), false);
+
+    oled_write_P(PSTR("\n\n"), false);
   }
 
   bool oled_task_kb(void) {
     if (!oled_task_user()) { return false; }
-
-    if (is_keyboard_master()) {
-      render_status();
-    } else {
       process_layer_state();
+    if (is_keyboard_master()) {
+    } else {
+      render_status();
     }
 
     return false;
