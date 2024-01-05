@@ -1,0 +1,11 @@
+LTO_ENABLE 				= yes
+BOOTMAGIC_ENABLE 		= no
+
+MOUSEKEY_ENABLE 		= no
+EXTRAKEY_ENABLE 		= no
+NKRO_ENABLE 			= no
+
+RGBLIGHT_ENABLE 		= no
+RGB_MATRIX_ENABLE     	= no
+
+WPM_ENABLE 				= yes
