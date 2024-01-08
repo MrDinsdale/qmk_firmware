@@ -2,7 +2,11 @@
 
 #define MASTER_LEFT
 
+/* Reduce size */
 #define LAYER_STATE_8BIT
+
+#define OLED_TIMEOUT 120000
+#define OLED_BRIGHTNESS 120
 
 #define SPLIT_WPM_ENABLE
 
