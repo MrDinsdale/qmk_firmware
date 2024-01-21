@@ -29,6 +29,8 @@ enum layer {
 #define HOME_E RSFT_T(KC_E)
 #define HOME_I LALT_T(KC_I)
 #define HOME_O RGUI_T(KC_O)
+#define HOME_EQ RCTL_T(KC_EQL)
+#define HOME_BS RSFT_T(KC_BSLS)
 
 // Modifiers
 #define GUI_TAB GUI_T(KC_TAB)
@@ -52,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_SYMBOLS] = LAYOUT(
              XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX,    XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX,
              _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                        KC_6,       KC_7,      KC_8,       KC_9,    KC_0,    _______,
-    XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,                                     KC_MINS,    KC_EQL,    KC_BSLS,    _______, _______, _______, XXXXXXX,
+    XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,                                     KC_MINS,    HOME_EQ,   HOME_BS,    _______, _______, _______, XXXXXXX,
              _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, S(KC_MINS), S(KC_EQL), S(KC_BSLS), _______, _______, _______,
                                         _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______,    _______,   _______
   ),

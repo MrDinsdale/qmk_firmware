@@ -17,6 +17,11 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+/*
+qmk compile -kb crkbd -km mrdinsdale
+qmk flash -kb crkbd -km mrdinsdale
+*/
+
 #include QMK_KEYBOARD_H
 //#include <stdio.h>
 
@@ -41,13 +46,10 @@ enum layer {
 #define HOME_E RSFT_T(KC_E)
 #define HOME_I LALT_T(KC_I)
 #define HOME_O RGUI_T(KC_O)
-
-// Modifiers
-#define GUI_TAB GUI_T(KC_TAB)
-#define C_CAPS  CTL_T(KC_CAPS)
-#define GUI_ESC GUI_T(KC_ESC)
-#define A_QUOTE OPT_T(KC_QUOT)
-#define C_SLASH LCTL_T(KC_SLSH)
+#define HOME_EQ RCTL_T(KC_EQL)
+#define HOME_BS RSFT_T(KC_BSLS)
+#define HOME_LB LALT_T(KC_LBRC)
+#define HOME_RB RGUI_T(KC_RBRC)
 
 // Fancy keys
 #define SGUI_1  SGUI_T(KC_LBRC)
@@ -56,6 +58,8 @@ enum layer {
 #define S_MINS  S(KC_MINS)
 #define S_EQL   S(KC_EQL)
 #define S_BSLS  S(KC_BSLS)
+#define S_LB   S(KC_LBRC)
+#define S_RB   S(KC_RBRC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT_split_3x6_3(
@@ -73,11 +77,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       _______,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, _______, _______, _______, _______, XXXXXXX,                      KC_MINS,  KC_EQL, KC_BSLS, KC_LBRC, KC_RBRC, XXXXXXX,
+      _______, _______, _______, _______, _______, XXXXXXX,                      KC_MINS, HOME_EQ, HOME_BS, HOME_LB, HOME_RB, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       S_MINS,   S_EQL,  S_BSLS, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______, _______, _______
+                                             S_LB, _______, _______,    _______, _______,    S_RB
                                       //`--------------------------'  `--------------------------'
   ),
   [_NAVIGATION] = LAYOUT_split_3x6_3(
