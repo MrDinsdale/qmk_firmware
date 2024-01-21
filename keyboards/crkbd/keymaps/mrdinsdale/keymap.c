@@ -62,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN,  KC_ESC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_CAPS,  HOME_A,  HOME_R,  HOME_S,  HOME_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O, KC_SLSH,
+      KC_CAPS,  HOME_A,  HOME_R,  HOME_S,  HOME_T,    KC_G,                         KC_M,  HOME_N,  HOME_E,  HOME_I,  HOME_O, KC_SLSH,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LCTL,    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H,  KC_GRV, KC_COMM,  KC_DOT, KC_QUOT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -278,22 +278,22 @@ if (current_wpm > 0) {
     }
 }
 
-layer_state_t layer_state_set_user(layer_state_t state) {
-    switch (get_highest_layer(state)) {
-    case _ALPHA:
-        rgb_matrix_reload_from_eeprom();
-        break;
-    case _SYMBOLS:
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_ALPHAS_MODS);
-        rgb_matrix_sethsv_noeeprom(HSV_TEAL);
-        break;
-    case _NAVIGATION:
-        rgb_matrix_mode_noeeprom(RGB_MATRIX_ALPHAS_MODS);
-        rgb_matrix_sethsv_noeeprom(HSV_PURPLE);
-        break;
-    }
-  return state;
-}
+// layer_state_t layer_state_set_user(layer_state_t state) {
+//     switch (get_highest_layer(state)) {
+//     case _ALPHA:
+//         rgb_matrix_reload_from_eeprom();
+//         break;
+//     case _SYMBOLS:
+//         rgb_matrix_mode_noeeprom(RGB_MATRIX_ALPHAS_MODS);
+//         rgb_matrix_sethsv_noeeprom(HSV_TEAL);
+//         break;
+//     case _NAVIGATION:
+//         rgb_matrix_mode_noeeprom(RGB_MATRIX_ALPHAS_MODS);
+//         rgb_matrix_sethsv_noeeprom(HSV_PURPLE);
+//         break;
+//     }
+//   return state;
+// }
 
 static void print_status_narrow(void) {
 
