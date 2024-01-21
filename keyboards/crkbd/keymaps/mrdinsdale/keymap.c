@@ -90,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, XXXXXXX,                      XXXXXXX, _______, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+      _______, RGB_TOG, RGB_MOD, RGB_HUI, RGB_VAI, RGB_SPI,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______, _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
@@ -282,27 +282,26 @@ if (current_wpm > 0) {
     }
 }
 
-// layer_state_t layer_state_set_user(layer_state_t state) {
-//     switch (get_highest_layer(state)) {
-//     case _ALPHA:
-//         rgb_matrix_reload_from_eeprom();
-//         break;
-//     case _SYMBOLS:
-//         rgb_matrix_mode_noeeprom(RGB_MATRIX_ALPHAS_MODS);
-//         rgb_matrix_sethsv_noeeprom(HSV_TEAL);
-//         break;
-//     case _NAVIGATION:
-//         rgb_matrix_mode_noeeprom(RGB_MATRIX_ALPHAS_MODS);
-//         rgb_matrix_sethsv_noeeprom(HSV_PURPLE);
-//         break;
-//     }
-//   return state;
-// }
+void keyboard_post_init_kb(void) {
+    rgb_matrix_enable_noeeprom();
+
+    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_REACTIVE_WIDE);
+}
+
+bool rgb_matrix_indicators_user(void) {
+    if(IS_LAYER_ON(_NAVIGATION)) {
+        rgb_matrix_set_color(11, 142, 42, 230);
+        rgb_matrix_set_color(16, 142, 42, 230);
+        rgb_matrix_set_color(19, 142, 42, 230);
+        rgb_matrix_set_color(22, 142, 42, 230);
+    }
+    return true;
+}
 
 static void print_status_narrow(void) {
 
-
     /* Print current layer */
+
     oled_write("LAYER", false);
 
     oled_set_cursor(0, 6);
@@ -320,7 +319,6 @@ static void print_status_narrow(void) {
         default:
             oled_write("Undef", false);
     }
-
 
     /* KEYBOARD PET RENDER START */
 
@@ -346,27 +344,30 @@ bool oled_task_user(void) {
     }
     return false;
 }
-
 #endif
- bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         /* KEYBOARD PET STATUS START */
 
         case KC_LCTL:
             isSneaking = record->event.pressed;
             break;
+
         case KC_SPC:
             isJumping = record->event.pressed;
+
             if (isJumping) {
                 showedJump = false;
             }
             break;
+
         case KC_CAPS:
             isBarking = record->event.pressed;
             break;
 
         /* KEYBOARD PET STATUS END */
-}
+    }
 
-return true;
+    return true;
 }

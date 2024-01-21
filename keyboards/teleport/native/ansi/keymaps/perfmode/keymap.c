@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS,          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,          KC_TRNS, KC_TRNS,
         KC_TRNS, KC_NO,   KC_TRNS,                            KC_TRNS,                            KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
     ),
-    
+
     [PERF] = LAYOUT_75_ansi(    /* keymap for layer 2 - PERF has a static LED display to increase matrix scan rates */
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS,     KC_TRNS,
@@ -146,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 /* RGB matrix indicator code
-It reads the current matrix color, offsets the hue by 30, 
+It reads the current matrix color, offsets the hue by 30,
 and sets val to RGB_MATRIX_MAXIMUM_BRIGHTNESS (by default, 255)
 This is applied to both caps lock, and other indicator keys for layer 1 */
 
@@ -186,7 +186,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
   } else {
     rgb_matrix_reload_from_eeprom();
   }
-    
+
   /* If reverting to base layer (no special LED effects) and single color rain is on, set "layer 1" mods back to matrix color to avoid single key persistence */
   if(!IS_LAYER_ON_STATE(state, 2) && !IS_LAYER_ON_STATE(state, 1) && rgb_matrix_get_mode() == 10) {
     HSV hsv_mat = rgb_matrix_get_hsv();
