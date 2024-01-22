@@ -29,13 +29,10 @@ enum layer {
 #define HOME_E RSFT_T(KC_E)
 #define HOME_I LALT_T(KC_I)
 #define HOME_O RGUI_T(KC_O)
-
-// Modifiers
-#define GUI_TAB GUI_T(KC_TAB)
-#define C_CAPS  CTL_T(KC_CAPS)
-#define GUI_ESC GUI_T(KC_ESC)
-#define A_QUOTE OPT_T(KC_QUOT)
-#define C_SLASH LCTL_T(KC_SLSH)
+#define HOME_EQ RCTL_T(KC_EQL)
+#define HOME_BS RSFT_T(KC_BSLS)
+#define HOME_LB LALT_T(KC_LBRC)
+#define HOME_RB RGUI_T(KC_RBRC)
 
 // Fancy keys
 #define SGUI_1  SGUI_T(KC_LBRC)
@@ -43,24 +40,24 @@ enum layer {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ALPHA] = LAYOUT(
-             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX,    XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX,
-             GUI_TAB, KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                                        KC_J,       KC_L,      KC_U,       KC_Y,    KC_SCLN, GUI_ESC,
-    XXXXXXX, C_CAPS,  HOME_A,  HOME_R,  HOME_S,  HOME_T,  KC_G,                                        KC_M,       HOME_N,    HOME_E,     HOME_I,  HOME_O,  C_SLASH, XXXXXXX,
-             KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_K,       KC_H,      KC_GRV,     KC_COMM, KC_DOT,  A_QUOTE,
+             KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                        KC_6,       KC_7,      KC_8,       KC_9,    KC_0,    XXXXXXX,
+             KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                                        KC_J,       KC_L,      KC_U,       KC_Y,    KC_SCLN, KC_ESC,
+    XXXXXXX, KC_CAPS, HOME_A,  HOME_R,  HOME_S,  HOME_T,  KC_G,                                        KC_M,       HOME_N,    HOME_E,     HOME_I,  HOME_O,  KC_SLSH, XXXXXXX,
+             KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_K,       KC_H,      KC_GRV,     KC_COMM, KC_DOT,  KC_QUOT,
                                         KC_MUTE, SGUI_1,  KC_SPC,  LSY_ENT, XXXXXXX, XXXXXXX, KC_BSPC, LFN_DEL,    LCAG_1,    KC_HOME
   ),
   [_SYMBOLS] = LAYOUT(
-             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX,    XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX,
+             _______, _______, _______, _______, _______, _______,                                     _______,    _______,   _______,    _______, _______, XXXXXXX,
              _______, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                        KC_6,       KC_7,      KC_8,       KC_9,    KC_0,    _______,
-    XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,                                     KC_MINS,    KC_EQL,    KC_BSLS,    _______, _______, _______, XXXXXXX,
+    XXXXXXX, _______, _______, _______, _______, _______, XXXXXXX,                                     KC_MINS,    HOME_EQ,   HOME_BS,    HOME_LB, HOME_RB, _______, XXXXXXX,
              _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, S(KC_MINS), S(KC_EQL), S(KC_BSLS), _______, _______, _______,
                                         _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______,    _______,   _______
   ),
   [_NAVIGATION] = LAYOUT(
-             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX,    XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX,
+             _______, _______, _______, _______, _______, _______,                                     _______,    _______,   _______,    _______, _______, _______,
              _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                                       KC_F6,      KC_F7,     KC_F8,      KC_F9,   KC_F10,  _______,
     XXXXXXX, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX,                                     XXXXXXX,    _______,   _______,    _______, _______, _______, XXXXXXX,
-             _______, RGB_MOD, RGB_HUI, RGB_M_P, RGB_M_SW,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX, _______,
+             _______, RGB_TOG, RGB_MOD, RGB_HUI, RGB_VAI, RGB_SPI, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX, _______,
                                         RGB_TOG, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______,    _______,   _______
   )
 };
@@ -69,9 +66,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool encoder_update_user(uint8_t index, bool clockwise) {
   if (index == 0) { // Encoder on master side
     if (clockwise) {
-      tap_code(KC_VOLU);
+      tap_code(KC_PGUP);
     } else {
-      tap_code(KC_VOLD);
+      tap_code(KC_PGDN);
     }
   }
 
