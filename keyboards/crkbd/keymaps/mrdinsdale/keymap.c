@@ -23,7 +23,6 @@ qmk flash -kb crkbd -km mrdinsdale
 */
 
 #include QMK_KEYBOARD_H
-//#include <stdio.h>
 
 enum layer {
   _ALPHA,
@@ -277,25 +276,47 @@ if (current_wpm > 0) {
         oled_set_cursor(0,0);
         oled_write("                                                                                                                        ", false);
         oled_off();
-
-
     }
 }
 
-void keyboard_post_init_kb(void) {
-    rgb_matrix_enable_noeeprom();
+#define BASE_ALPHA 81, 68, 166
+#define CAPS_LOCK_COLOR 80, 5, 0
+#define NUM_ROW_COLOR RGB_ORANGE
+#define NAV_ROW_COLOR RGB_PURPLE
 
-    rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_REACTIVE_WIDE);
-}
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if (host_keyboard_led_state().caps_lock)
+        rgb_matrix_set_color(25, CAPS_LOCK_COLOR);
 
-bool rgb_matrix_indicators_user(void) {
-    if(IS_LAYER_ON(_NAVIGATION)) {
-        rgb_matrix_set_color(11, 142, 42, 230);
-        rgb_matrix_set_color(16, 142, 42, 230);
-        rgb_matrix_set_color(19, 142, 42, 230);
-        rgb_matrix_set_color(22, 142, 42, 230);
+    switch(get_highest_layer(layer_state)) {
+        case _ALPHA:
+            rgb_matrix_set_color_all(BASE_ALPHA);
+            break;
+        case _SYMBOLS:
+            rgb_matrix_set_color(9, NUM_ROW_COLOR);
+            rgb_matrix_set_color(10, NUM_ROW_COLOR);
+            rgb_matrix_set_color(17, NUM_ROW_COLOR);
+            rgb_matrix_set_color(18, NUM_ROW_COLOR);
+            rgb_matrix_set_color(23, NUM_ROW_COLOR);
+
+            rgb_matrix_set_color(36, NUM_ROW_COLOR);
+            rgb_matrix_set_color(37, NUM_ROW_COLOR);
+            rgb_matrix_set_color(44, NUM_ROW_COLOR);
+            rgb_matrix_set_color(45, NUM_ROW_COLOR);
+            rgb_matrix_set_color(50, NUM_ROW_COLOR);
+
+            // rgb_matrix_set_color(42, 140, 0, 255);
+            break;
+        case _NAVIGATION:
+            rgb_matrix_set_color(11, NAV_ROW_COLOR);
+            rgb_matrix_set_color(16, NAV_ROW_COLOR);
+            rgb_matrix_set_color(19, NAV_ROW_COLOR);
+            rgb_matrix_set_color(22, NAV_ROW_COLOR);
+            break;
+        default:
+            break;
     }
-    return true;
+    return false;
 }
 
 static void print_status_narrow(void) {
