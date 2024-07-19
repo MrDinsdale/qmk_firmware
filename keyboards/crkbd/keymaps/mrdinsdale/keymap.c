@@ -285,37 +285,57 @@ if (current_wpm > 0) {
 #define NAV_ROW_COLOR RGB_PURPLE
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    if (host_keyboard_led_state().caps_lock)
-        rgb_matrix_set_color(25, CAPS_LOCK_COLOR);
+    // if (host_keyboard_led_state().caps_lock)
+    //     rgb_matrix_set_color(25, CAPS_LOCK_COLOR);
 
-    switch(get_highest_layer(layer_state)) {
-        case _ALPHA:
-            rgb_matrix_set_color_all(BASE_ALPHA);
-            break;
-        case _SYMBOLS:
-            rgb_matrix_set_color(9, NUM_ROW_COLOR);
-            rgb_matrix_set_color(10, NUM_ROW_COLOR);
-            rgb_matrix_set_color(17, NUM_ROW_COLOR);
-            rgb_matrix_set_color(18, NUM_ROW_COLOR);
-            rgb_matrix_set_color(23, NUM_ROW_COLOR);
+    // switch(get_highest_layer(layer_state)) {
+    //     case _ALPHA:
+    //         rgb_matrix_set_color_all(BASE_ALPHA);
+    //         break;
+    //     case _SYMBOLS:
+    //         rgb_matrix_set_color(9, NUM_ROW_COLOR);
+    //         rgb_matrix_set_color(10, NUM_ROW_COLOR);
+    //         rgb_matrix_set_color(17, NUM_ROW_COLOR);
+    //         rgb_matrix_set_color(18, NUM_ROW_COLOR);
+    //         rgb_matrix_set_color(23, NUM_ROW_COLOR);
 
-            rgb_matrix_set_color(36, NUM_ROW_COLOR);
-            rgb_matrix_set_color(37, NUM_ROW_COLOR);
-            rgb_matrix_set_color(44, NUM_ROW_COLOR);
-            rgb_matrix_set_color(45, NUM_ROW_COLOR);
-            rgb_matrix_set_color(50, NUM_ROW_COLOR);
+    //         rgb_matrix_set_color(36, NUM_ROW_COLOR);
+    //         rgb_matrix_set_color(37, NUM_ROW_COLOR);
+    //         rgb_matrix_set_color(44, NUM_ROW_COLOR);
+    //         rgb_matrix_set_color(45, NUM_ROW_COLOR);
+    //         rgb_matrix_set_color(50, NUM_ROW_COLOR);
 
-            // rgb_matrix_set_color(42, 140, 0, 255);
-            break;
-        case _NAVIGATION:
-            rgb_matrix_set_color(11, NAV_ROW_COLOR);
-            rgb_matrix_set_color(16, NAV_ROW_COLOR);
-            rgb_matrix_set_color(19, NAV_ROW_COLOR);
-            rgb_matrix_set_color(22, NAV_ROW_COLOR);
-            break;
-        default:
-            break;
+    //         // rgb_matrix_set_color(42, 140, 0, 255);
+    //         break;
+    //     case _NAVIGATION:
+    //         rgb_matrix_set_color(11, NAV_ROW_COLOR);
+    //         rgb_matrix_set_color(16, NAV_ROW_COLOR);
+    //         rgb_matrix_set_color(19, NAV_ROW_COLOR);
+    //         rgb_matrix_set_color(22, NAV_ROW_COLOR);
+    //         break;
+    //     default:
+    //         break;
+    // }
+
+    HSV hsv = {0, 255, 255};
+
+    if (layer_state_is(layer_state, 2)) {
+        hsv = {130, 255, 255};
+    } else {
+        hsv = {30, 255, 255};
     }
+
+    if (hsv.v > rgb_matrix_get_val()) {
+        hsv.v = rgb_matrix_get_val();
+    }
+    RGB rgb = hsv_to_rgb(hsv);
+
+    for (uint8_t i = led_min; i < led_max; i++) {
+        if (HAS_FLAGS(g_led_config.flags[i], 0x01)) { // 0x01 == LED_FLAG_MODIFIER
+            rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
+        }
+    }
+
     return false;
 }
 
